@@ -64,6 +64,9 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public CourseDTO put(CourseDTO courseDTO) {
+        if(courseRepository.findCourseById(courseDTO.getId()) == null){
+            throw new NotFoundException("id "+courseDTO.getId()+" is not exist !!!");
+        }
         Course course = new ModelMapper().map(courseDTO,Course.class);
         courseRepository.save(course);
         return courseDTO;
