@@ -1,6 +1,7 @@
 package com.techmaster.testSpringRESTAPI.service;
 
 import com.techmaster.testSpringRESTAPI.dto.CourseDTO;
+import com.techmaster.testSpringRESTAPI.exception.NotFoundException;
 import com.techmaster.testSpringRESTAPI.model.Course;
 import com.techmaster.testSpringRESTAPI.repository.CourseRepository;
 import org.modelmapper.ModelMapper;
@@ -70,6 +71,9 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public void delete(int id) {
+        if(courseRepository.findCourseById(id) == null){
+            throw new NotFoundException("id "+id+" is not exist !!!");
+        }
         courseRepository.delete(id);
     }
 }

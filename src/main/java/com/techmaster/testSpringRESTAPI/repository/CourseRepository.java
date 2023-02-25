@@ -10,7 +10,9 @@ public class CourseRepository {
     public List<Course> findAll(){
         return CourseDB.courses;
     }
-
+    public Course findCourseById(int id){
+        return CourseDB.courses.stream().filter(course -> course.getId() == id).findFirst().orElse(null);
+    };
     public void save(Course course) {
         CourseDB.courses.add(course);
     }
